@@ -1,0 +1,42 @@
+package in.kevinlobo.journalApp.service;
+
+import in.kevinlobo.journalApp.entity.JournalEntry;
+import in.kevinlobo.journalApp.entity.User;
+import in.kevinlobo.journalApp.repository.JournalEntryRepository;
+import in.kevinlobo.journalApp.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+@Component
+public class UserService {
+
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public void saveEntry(User user) {
+            userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> findEntryById(ObjectId id) {
+        return userRepository.findById(id);
+    }
+
+    public void deleteById(ObjectId id) {
+        userRepository.deleteById(id);
+    }
+
+    public User findUserByUsername(String userName) {
+        return userRepository.findByUsername(userName);
+    }
+}
