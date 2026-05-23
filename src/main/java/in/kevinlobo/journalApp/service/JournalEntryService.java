@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,12 +25,21 @@ public class JournalEntryService {
     private UserService userService;
 
 
+    /*
+      @Transactional this annotation will make sure that all the changes
+    are saved in the database if one fail's it won't save any changes
+    */
+    @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName) {
             User user = userService.findUserByUsername(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry save = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(save);
             userService.saveEntry(user);
+    }
+
+    public void saveEntry(JournalEntry journalEntry) {
+        journalEntryRepository.save(journalEntry);
     }
 
     public List<JournalEntry> getAll() {
