@@ -1,15 +1,11 @@
 package in.kevinlobo.journalApp.service;
 
-import in.kevinlobo.journalApp.entity.JournalEntry;
 import in.kevinlobo.journalApp.entity.User;
-import in.kevinlobo.journalApp.repository.JournalEntryRepository;
 import in.kevinlobo.journalApp.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +33,6 @@ public class UserService {
     }
 
     public User findUserByUsername(String userName) {
-        return userRepository.findByUsername(userName);
+        return userRepository.findByUserName(userName);
     }
 }
