@@ -26,4 +26,6 @@ public class User {
 
     @DBRef // this annotation will create the reference of the JournalEntries table(class) in to users table(table)
     private List<JournalEntry> journalEntries = new ArrayList<>();
+
+    private List<String> roles;
 }
