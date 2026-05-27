@@ -35,14 +35,14 @@ public class UserController {
         User userInDB = userService.findUserByUsername(userName);
         userInDB.setUserName(user.getUserName());
         userInDB.setPassword(user.getPassword());
-        userService.saveEntry(userInDB);
+        userService.saveNewUser(userInDB);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteUserById(@RequestBody User user) {
+    public ResponseEntity<?> deleteUserById() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        userRepository.deleteUserByName(authentication.getName());
+        userRepository.deleteByUserName(authentication.getName());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
