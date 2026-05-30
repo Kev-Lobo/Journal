@@ -16,6 +16,7 @@ public class PublicController {
     public String HealthCheck() {
         return "OK";
     }
+
     @PostMapping("/create-user")
     public void saveUser(@RequestBody User user) {
         userService.saveNewUser(user);
