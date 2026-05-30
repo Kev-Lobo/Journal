@@ -35,10 +35,10 @@ public class JournalEntryController {
         if( all !=null && !all.isEmpty()){
             return new ResponseEntity<>(all, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry){
         try{
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
