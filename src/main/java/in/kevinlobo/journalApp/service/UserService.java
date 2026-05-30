@@ -25,6 +25,7 @@ public class UserService {
         user.setRoles(Arrays.asList("USER"));
         userRepository.save(user);
     }
+
     public void saveUser(User user) {
         userRepository.save(user);
     }
@@ -41,7 +42,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User findUserByUsername(String userName) {
+    public User findByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
 }

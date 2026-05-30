@@ -32,7 +32,7 @@ public class UserController {
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User userInDB = userService.findUserByUsername(userName);
+        User userInDB = userService.findByUserName(userName);
         userInDB.setUserName(user.getUserName());
         userInDB.setPassword(user.getPassword());
         userService.saveUser(userInDB);

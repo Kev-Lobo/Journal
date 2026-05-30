@@ -32,11 +32,11 @@ public class JournalEntryService {
     @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName) {
         try {
-            User user = userService.findUserByUsername(userName);
+            User user = userService.findByUserName(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry save = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(save);
-            userService.saveNewUser(user);
+            userService.saveUser(user);
         }
         catch (Exception e){
             System.out.println(e);
@@ -57,9 +57,9 @@ public class JournalEntryService {
     }
 
     public void deleteEntryById(ObjectId id, String userName) {
-        User user = userService.findUserByUsername(userName);
+        User user = userService.findByUserName(userName);
         user.getJournalEntries().removeIf(x -> x.getId().equals(id));
-        userService.saveNewUser(user);
+        userService.saveUser(user);
         journalEntryRepository.deleteById(id);
     }
 

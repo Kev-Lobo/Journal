@@ -19,14 +19,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserServiceDetailsImpl userDetailsService;
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
        http.authorizeRequests()
-               .antMatchers("/journal/**","/user/**").authenticated()
+               .antMatchers("/user/**","/journal/**").authenticated()
                .anyRequest().permitAll()
                .and()
                .httpBasic();
-       http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
+       http.sessionManagement()
+               .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+               .and()
+               .csrf()
+               .disable();
        /*Cross-Site Request Forgery is a Cybersecurity measure to prevent unauthorized access to web
        applications through malicious attacks. Which can trick the user into providing their credentials to a website.
        or submitting a malicious request to a website. In this the endpoint will accept the CSRF token. to authorize
@@ -38,8 +47,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

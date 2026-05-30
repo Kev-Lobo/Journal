@@ -26,11 +26,11 @@ public class JournalEntryController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping //("{userName}")
     public ResponseEntity<?> getAllJournalEntriesOfUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User entriesByUsername = userService.findUserByUsername(userName);
+        User entriesByUsername = userService.findByUserName(userName);
         List<JournalEntry> all = entriesByUsername.getJournalEntries();
         if( all !=null && !all.isEmpty()){
             return new ResponseEntity<>(all, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class JournalEntryController {
     public ResponseEntity<JournalEntry> getJournalEntryById(@PathVariable ObjectId myId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User user = userService.findUserByUsername(userName);
+        User user = userService.findByUserName(userName);
         List<JournalEntry> collect = user.getJournalEntries().stream().filter(x -> x.getId().equals(myId)).collect(Collectors.toList());
         if(!collect.isEmpty()){
             Optional<JournalEntry> journalEntry= journalEntryService.findEntryById(myId);
