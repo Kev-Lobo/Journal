@@ -104,13 +104,4 @@ public class UserServiceTests {
         verify(userRepository, times(1)).findAll();
         verifyNoMoreInteractions(userRepository);
     }
-    //    @Test
-//    public void findByUserNameTest(){
-//        assertNotNull(userRepository.findByUserName("kevin"));
-//    }
-//
-//    @Test
-//    public void getAllUsersTest(){
-//        assertNotNull(userRepository.findAll());
-//    }
 }
