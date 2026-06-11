@@ -2,6 +2,7 @@ package in.kevinlobo.journalApp.service;
 
 import in.kevinlobo.journalApp.entity.User;
 import in.kevinlobo.journalApp.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -22,8 +25,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
+    @Transactional
     public void saveNewUser(User user) {
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -31,7 +34,7 @@ public class UserService {
             userRepository.save(user);
         }
         catch(Exception e) {
-            logger.error("Error saving user: " + e.getMessage());
+            log.error("Error occurred for {} ", user.getUserName(),e );
         }
     }
 
