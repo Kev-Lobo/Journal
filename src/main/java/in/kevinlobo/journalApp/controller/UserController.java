@@ -46,4 +46,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/greetings")
+    public ResponseEntity<?> Greetings() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return new ResponseEntity<>("Hi " + authentication.getName(),HttpStatus.OK);
+    }
+
 }
