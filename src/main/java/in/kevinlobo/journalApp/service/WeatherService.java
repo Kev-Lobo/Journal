@@ -1,24 +1,31 @@
 package in.kevinlobo.journalApp.service;
 
 import in.kevinlobo.journalApp.apiResponse.WetherResponse;
+import in.kevinlobo.journalApp.cache.AppCache;
+import in.kevinlobo.journalApp.constants.PlaceHolders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Component
+@Service
 public class WeatherService {
-    private static final String api_key = "Copy from your OneNote";
 
-    private static final String api = "http://api.openweathermap.org/data/2.5/weather?q=City,IN&APPID=API_KEY";
+    @Value("${weather.api.key}")
+    private String apiKey;
 
     @Autowired
     public RestTemplate restTemplate;
 
+    @Autowired
+    public AppCache appCache;
+
     public WetherResponse getWeather(String city) {
 
-        String finalApi = api.replace("City", city).replace("API_KEY", api_key);
+        String finalApi = appCache.appCache.get(AppCache.keys.WEATHER_API.toString())
+                .replace(PlaceHolders.CITY, city).replace(PlaceHolders.API_KEY, apiKey);
         ResponseEntity<WetherResponse> response = restTemplate.exchange(finalApi, HttpMethod.GET, null, WetherResponse.class);
         WetherResponse body = response.getBody();
         return body;
