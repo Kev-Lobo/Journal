@@ -13,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class WeatherService {
 
-    @Value("${weather.api.key}")
-    private String apiKey;
+//    @Value("${weather.api.key}") When the parameter of any variable is provided in YML file, it will be injected here using the @Value keyword
+//    private String apiKey;
 
     @Autowired
     public RestTemplate restTemplate;
@@ -25,7 +25,8 @@ public class WeatherService {
     public WetherResponse getWeather(String city) {
 
         String finalApi = appCache.appCache.get(AppCache.keys.WEATHER_API.toString())
-                .replace(PlaceHolders.CITY, city).replace(PlaceHolders.API_KEY, apiKey);
+                .replace(PlaceHolders.CITY, city)
+                .replace(PlaceHolders.API_KEY, appCache.appCache.get(AppCache.keys.API_KEY.toString()));
         ResponseEntity<WetherResponse> response = restTemplate.exchange(finalApi, HttpMethod.GET, null, WetherResponse.class);
         WetherResponse body = response.getBody();
         return body;

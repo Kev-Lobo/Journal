@@ -13,8 +13,10 @@ import java.util.Map;
 @Component
 public class AppCache {
     public enum keys{
-        WEATHER_API;
+        WEATHER_API,
+        API_KEY
     }
+
     @Autowired
     private ConfigJournalApp configJournalApp;
 
