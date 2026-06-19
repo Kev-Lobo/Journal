@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class WeatherService {
 
-//    @Value("${weather.api.key}") When the parameter of any variable is provided in YML file, it will be injected here using the @Value keyword
+//    @Value("${weather.api.key}") When the parameter of any variable is provided in YML file, it will be injected here using the @Value Annotaion
 //    private String apiKey;
 
     @Autowired
@@ -23,7 +23,6 @@ public class WeatherService {
     public AppCache appCache;
 
     public WetherResponse getWeather(String city) {
-
         String finalApi = appCache.appCache.get(AppCache.keys.WEATHER_API.toString())
                 .replace(PlaceHolders.CITY, city)
                 .replace(PlaceHolders.API_KEY, appCache.appCache.get(AppCache.keys.API_KEY.toString()));
