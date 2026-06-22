@@ -6,12 +6,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 
+import javax.mail.internet.MimeMessage;
+import java.io.InputStream;
+
 @SpringBootApplication
 @EnableTransactionManagement
+@EnableScheduling
 public class JournalApplication {
 
     public static void main(String[] args) {
@@ -33,5 +42,6 @@ public class JournalApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
 
 }

@@ -25,14 +25,14 @@ public class UserServiceTests {
     private User user1;
     private User user2;
 
-    @BeforeEach
-    void setUp() {
-        user1 = new User("kevin", "kevin");
-        user1.setRoles(Arrays.asList("USER"));
-
-        user2 = new User("john", "kevin");
-        user2.setRoles(Arrays.asList("USER"));
-    }
+//    @BeforeEach
+//    void setUp() {
+//        user1 = new User("kevin", "kevin");
+//        user1.setRoles(Arrays.asList("USER"));
+//
+//        user2 = new User("john", "kevin");
+//        user2.setRoles(Arrays.asList("USER"));
+//    }
 
     @Test
     void getAllUsers_ShouldReturnAllUsers_WhenUsersExist() {
