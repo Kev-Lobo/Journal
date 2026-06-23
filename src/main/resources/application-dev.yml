@@ -1,4 +1,7 @@
 spring:
+  redis:
+    host: localhost
+    port: 6379
   data:
     mongodb:
       uri: mongodb+srv://kevinlobo998_db_user:0FsGGbTl8iiANLa9@cluster0.8lq2t7p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
