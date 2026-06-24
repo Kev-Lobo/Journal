@@ -10,8 +10,8 @@ public class EmailServiceTest {
     @Autowired
     private EmailService emailService;
 
-//    @Test
-//    public void testSendEmail() {
-//        emailService.sendEmail("kevinlobo998@gmail.com", "Subject", "kindly perform the testing");
-//    }
+    @Test
+    public void testSendEmail() {
+        emailService.sendEmail("kevinlobo998@gmail.com", "Subject", "kindly perform the testing");
+    }
 }
