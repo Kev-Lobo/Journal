@@ -1,4 +1,5 @@
 <configuration>
+    <property name="LOG_FILE_PATH" value="/Users/kevinlobo/Documents/Logs/journalApp.log"/>
     <appender name="myConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -7,7 +8,7 @@
     <appender name="myFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>journalApp.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>journalApp-%d{yyyy-MM-dd-HH-mm}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_FILE_PATH}/journalApp-%d{yyyy-MM-dd-HH-mm}.%i.log</fileNamePattern>
             <maxHistory>10</maxHistory>
             <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
