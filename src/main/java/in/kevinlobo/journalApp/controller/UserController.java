@@ -1,6 +1,6 @@
 package in.kevinlobo.journalApp.controller;
 
-import in.kevinlobo.journalApp.apiResponse.WetherResponse;
+import in.kevinlobo.journalApp.apiResponse.WeatherResponse;
 import in.kevinlobo.journalApp.entity.User;
 import in.kevinlobo.journalApp.repository.UserRepository;
 import in.kevinlobo.journalApp.service.UserService;
@@ -54,7 +54,7 @@ public class UserController {
     @GetMapping("/greetings")
     public ResponseEntity<?> Greetings() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        WetherResponse weatherResponse = weatherService.getWeather("Mumbai");
+        WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");
         String greetings = "";
         if(weatherResponse!=null) {
             greetings = ", Weather feels like :" + weatherResponse.main.feelsLike;

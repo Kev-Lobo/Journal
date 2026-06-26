@@ -1,10 +1,9 @@
 package in.kevinlobo.journalApp.service;
 
-import in.kevinlobo.journalApp.apiResponse.WetherResponse;
+import in.kevinlobo.journalApp.apiResponse.WeatherResponse;
 import in.kevinlobo.journalApp.cache.AppCache;
 import in.kevinlobo.journalApp.constants.PlaceHolders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,24 +16,24 @@ public class WeatherService {
 //    private String apiKey;
 
     @Autowired
-    public RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     @Autowired
-    public AppCache appCache;
+    private AppCache appCache;
 
     @Autowired
-    public RedisService redisService;
+    private RedisService redisService;
 
-    public WetherResponse getWeather(String city) {
-        WetherResponse wetherResponse = redisService.get("weather_of_"+city, WetherResponse.class);
-        if(wetherResponse != null){
-            return wetherResponse;
+    public WeatherResponse getWeather(String city) {
+        WeatherResponse weatherResponse = redisService.get("weather_of_"+city, WeatherResponse.class);
+        if(weatherResponse != null){
+            return weatherResponse;
         }else {
-            String finalApi = appCache.appCache.get(AppCache.keys.WEATHER_API.toString())
+            String finalApi = appCache.appCache.get(AppCache.Keys.WEATHER_API.toString())
                     .replace(PlaceHolders.CITY, city)
-                    .replace(PlaceHolders.API_KEY, appCache.appCache.get(AppCache.keys.API_KEY.toString()));
-            ResponseEntity<WetherResponse> response = restTemplate.exchange(finalApi, HttpMethod.GET, null, WetherResponse.class);
-            WetherResponse body = response.getBody();
+                    .replace(PlaceHolders.API_KEY, appCache.appCache.get(AppCache.Keys.API_KEY.toString()));
+            ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalApi, HttpMethod.GET, null, WeatherResponse.class);
+            WeatherResponse body = response.getBody();
             if(body != null){
                 redisService.set("weather_of_"+city, body, 300L);
             }

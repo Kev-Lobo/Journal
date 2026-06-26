@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Component
 public class AppCache {
-    public enum keys{
+    public enum Keys {
         WEATHER_API,
         API_KEY
     }
@@ -21,7 +21,6 @@ public class AppCache {
     private ConfigJournalApp configJournalApp;
 
     public Map<String, String> appCache;
-
 
     @PostConstruct
     public void initCache() {

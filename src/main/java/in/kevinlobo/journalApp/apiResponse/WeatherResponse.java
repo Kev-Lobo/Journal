@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class WetherResponse {
+public class WeatherResponse {
     public List<Weather> weather;
     public Main main;
     public String name;
