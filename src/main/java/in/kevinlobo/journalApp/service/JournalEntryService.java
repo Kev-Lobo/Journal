@@ -40,8 +40,7 @@ public class JournalEntryService {
             userService.saveUser(user);
         }
         catch (Exception e){
-            System.out.println(e);
-            throw new RuntimeException("An error occurred while saving entry");
+            log.error("An error occurred while saving entry",e);
         }
     }
 
@@ -69,8 +68,7 @@ public class JournalEntryService {
             }
         }
         catch (Exception e){
-            System.out.println(e);
-            throw new RuntimeException("An error occurred while deleting entry");
+            log.error("An error occurred while deleting entry",e);
         }
         return removed;
     }
