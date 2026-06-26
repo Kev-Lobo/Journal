@@ -1,27 +1,11 @@
 spring:
-  redis:
-    host: localhost
-    port: 6379
   data:
     mongodb:
-      uri: mongodb+srv://kevinlobo998_db_user:0FsGGbTl8iiANLa9@cluster0.8lq2t7p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      uri: mongodb+srv://kevinlobo998_db_user:${MONGO_PASSWORD}@cluster0.8lq2t7p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: journaldb
       auto-index-creation: true
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: kevinlobo998@gmail.com
-    password: uzql qsnj kqyl rgdl
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
 
 server:
   port: 8080
   servlet:
     context-path: /journal
-
-kind: Application

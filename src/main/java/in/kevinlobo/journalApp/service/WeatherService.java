@@ -26,7 +26,7 @@ public class WeatherService {
     public RedisService redisService;
 
     public WetherResponse getWeather(String city) {
-        WetherResponse wetherResponse = redisService.get("Weather_of_" + city, WetherResponse.class);
+        WetherResponse wetherResponse = redisService.get("weather_of_"+city, WetherResponse.class);
         if(wetherResponse != null){
             return wetherResponse;
         }else {
@@ -36,7 +36,7 @@ public class WeatherService {
             ResponseEntity<WetherResponse> response = restTemplate.exchange(finalApi, HttpMethod.GET, null, WetherResponse.class);
             WetherResponse body = response.getBody();
             if(body != null){
-                redisService.set("Weather_of_"+city, body, 300L);
+                redisService.set("weather_of_"+city, body, 300L);
             }
             return body;
         }
