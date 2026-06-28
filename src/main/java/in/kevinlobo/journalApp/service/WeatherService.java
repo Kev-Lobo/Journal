@@ -3,6 +3,8 @@ package in.kevinlobo.journalApp.service;
 import in.kevinlobo.journalApp.apiResponse.WeatherResponse;
 import in.kevinlobo.journalApp.cache.AppCache;
 import in.kevinlobo.journalApp.constants.PlaceHolders;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class WeatherService {
 
 //    @Value("${weather.api.key}") When the parameter of any variable is provided in YML file, it will be injected here using the @Value Annotaion
 //    private String apiKey;
+
 
     @Autowired
     private RestTemplate restTemplate;
