@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class UserServiceDetailsImplTest {
+public class UserDetailsServiceImplTest {
 
     @InjectMocks
-    private UserServiceDetailsImpl userServiceDetailsImpl;
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @MockBean
     private UserRepository userRepository;
@@ -29,7 +29,7 @@ public class UserServiceDetailsImplTest {
 
     @Test
     void loadUserByUserNameTest() {
-//        UserDetails userDetails = userServiceDetailsImpl.loadUserByUsername("kevin");
+//        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername("kevin");
 //        assertNotNull(userDetails);
     }
 }
