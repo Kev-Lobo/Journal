@@ -1,5 +1,6 @@
 package in.kevinlobo.journalApp.config;
 
+import in.kevinlobo.journalApp.filter.JwtFilter;
 import in.kevinlobo.journalApp.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +21,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private JwtFilter jwtFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,9 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
        http.authorizeRequests()
                .antMatchers("/user/**","/journal/**").authenticated()
                .antMatchers("/admin/**").hasRole("ADMIN")
-               .anyRequest().permitAll()
-               .and()
-               .httpBasic();
+               .anyRequest().permitAll();
        http.sessionManagement()
                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                .and()
@@ -48,6 +51,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
        applications through malicious attacks. Which can trick the user into providing their credentials to a website.
        or submitting a malicious request to a website. In this the endpoint will accept the CSRF token. to authorize
        the request. to avoid malicious attacks.*/
+
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
