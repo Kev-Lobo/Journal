@@ -18,10 +18,6 @@ public class WeatherService {
 
 //    @Value("${weather.api.key}") When the parameter of any variable is provided in YML file, it will be injected here using the @Value Annotaion
 //    private String apiKey;
-
-
-
-
     @Autowired
     private RestTemplate restTemplate;
 
