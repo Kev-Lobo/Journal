@@ -5,5 +5,6 @@ public enum Sentiment {
     SAD,
     ANGRY,
     NEUTRAL,
-    ANXIOUS
+    ANXIOUS,
+    EXCITED
 }
