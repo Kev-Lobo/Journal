@@ -28,7 +28,7 @@ public class User {
     private String email;
     private boolean sentimentAnalysis;
     @DBRef // this annotation will create the reference of the JournalEntries table(class) in to users table(table)
-    private List<JournalEntry> journalEntries = new ArrayList<>();
+    private List<JournalEntry> journalEntries;
 
     private List<String> roles;
 
