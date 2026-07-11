@@ -67,6 +67,9 @@ public class JournalEntryService {
                 journalEntryRepository.deleteById(id);
             }
         }
+
+
+
         catch (Exception e){
             log.error("An error occurred while deleting entry",e);
         }
